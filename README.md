@@ -1,14 +1,13 @@
 # ChatDiary - A demo that uses AWS with a mobile app for speech analysis
 Mobile app: built with Ionic 3 (however the AWS part should work with any mobile app)
 
-Job flow:
-Record audio from mobile app -> upload to AWS S3 -> convert file to mp3 -> Amazon Transcribe -> Amazon Comprehend -> store results in Amazon DynamoDB -> query results from any app with Lambda API
+Job flow: Record audio from the mobile app -> upload to AWS S3 -> convert the file to mp3 -> Amazon Transcribe -> Amazon Comprehend -> store results in Amazon DynamoDB -> query results from any app with Lambda API
 
-the app looks like:
+The app looks like:
 
 ![](./aws/ChatDiary1.png)
 
-after AWS does all its work, the result looks like:
+After AWS does all its work, the result looks like:
 
 ![](./aws/ChatDiary2.png)
 
@@ -31,45 +30,45 @@ If you choose to work with Ionic, you need to
 
 
 
-### Settin up AWS
+### Setting up AWS
 After creating an account with AWS, you will need to set up the following:(and all the lambda roles for different services, omitted here):
 
 Initial set up and file upload:
-1. create an identity pool (not user pool) in Cognito (make sure it allows no auth access to api, unless you have individual user accounts set up)
+1. create an identity pool (not user pool) in Cognito (make sure it allows no auth access to the API, unless you have individual user accounts set up)
 
 2. create an S3 bucket for uploading the audio files from the app (this is the one to be added to ionic/your app)  
 
 Convert the audio format to mp3 (3gp to mp3, assuming Android)
 3. create an S3 bucket for converted mp3
 
-4. set up elastic transcoder to create a pipeline id 		
+4. set up Elastic Transcoder to create a pipeline ID 		
 
-5. create a lambda to start the conversion, triggered by a file created in the source S3
+5. create a lambda to start the conversion, triggered by a file being created in the source S3 bucket
 	(see the index.js in the folder aws/convert3gpToMp3 for the actual lambda function)
 	set up environment variables accordingly
 	
 	![](./aws/convert3gpToMp3/environment_variable.png)
 				
 		
-Create Transcribe job to be triggered on file created in the bucket with the converted mp3 files
+Create a Transcribe job to be triggered by a file being created in the bucket with the converted mp3 files
 6. create an S3 bucket to collect transcribe results
 
-7. creare a lambda to trigger the Transcribe job (see index.py in the folder aws/FlorenceTranscribe for the actual function)
+7. create a lambda to start a Transcribe job (see index.py in the folder aws/FlorenceTranscribe for the actual function)
 	set up environment variables accordingly
 		
 	![](./aws/FlorenceTranscribe/environment_variable.png)
 		
 	
-Create Comprehend job to analyse Transcribed audio and save the result in database
-8. create a dynamoDB table to store the Comprehend results (just the table name is needed for the lambda)
+Create a Comprehend job to analyse the transcribed audio and save the result in the database
+8. create a DynamoDB table to store the Comprehend results (just the table name is needed for the lambda)
 
-9. create a lambda to trigger Comprehend on file created in the bucket that store Transcirbe results,(see lambda_function.py in aws/FlorenceComprehend for the actual function)
+9. create a lambda to start a Comprehend job when a file is created in the bucket that store the Transcirbe results,(see lambda_function.py in aws/FlorenceComprehend for the actual function)
 	set up environment variables accordingly
 		
 	![](./aws/FlorenceComprehend/environment_variable.png)
 		
 	
-Allow external app to query the final results
+Allow external apps to query the final results
 10. create a lambda to search for the correct record in the database (see index.js in QueryComprehendResult for the actual function)
 
 11. create an API link that an external app can access the last lambda, the lambda can actually generate an api link by itself, or we can use API gateway and integrate with the lambda(see screenshots)
