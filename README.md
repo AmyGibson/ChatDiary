@@ -1,17 +1,16 @@
 # ChatDiary
 
-##A demo that uses AWS with a mobile app for speech analysis
+## A demo that uses AWS with a mobile app for speech analysis
 Mobile app: built with Ionic 3 (however the AWS part should work with any mobile app)
 
 Job flow:
 Record audio from mobile app -> upload to AWS S3 -> convert file to mp3 -> Amazon Transcribe -> Amazon Comprehend -> store results in Amazon DynamoDB -> query results from any app with Lambda API
 
 the app looks like:
-![Alt text](./aws/ChatDiary1.png?raw=true)
-<img src="./aws/ChatDiary1.png" />
+![](./aws/ChatDiary1.png | width=200)
 
 after AWS does all its work, the result looks like:
-![Alt text](./aws/ChatDiary1.png?raw=true)
+![](./aws/ChatDiary1.png | width=200)
 
 
 
