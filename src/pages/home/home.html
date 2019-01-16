@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Sound Recorder 
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-content>
+      <ion-card-title>
+        <button ion-button primary (click)="stopRecord()" *ngIf="recording"><ion-icon name="mic-off"></ion-icon>&nbsp;&nbsp;Stop Record</button>
+        <button ion-button primary (click)="startRecord()" *ngIf="!recording"><ion-icon name="mic"></ion-icon>&nbsp;&nbsp;Start Record</button>
+      </ion-card-title>
+    </ion-card-content>
+  </ion-card>
+<!--
+  <button ion-button clear item-end large (click)="loadResults('record30102018115224.3gp', i)">test view results</button>
+-->
+  <ion-list>
+    <ion-item *ngFor="let audio of audioList; index as i;">
+      <p>{{audio.filename}}</p>
+      <button ion-button clear (click)="uploadAudio(audio.filename, i)"><ion-icon name="play">upload</ion-icon></button>
+      <button ion-button clear (click)="loadResults(audio.filename, i)">view results</button>
+    
+    </ion-item>
+  </ion-list>
+  
+</ion-content>

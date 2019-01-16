@@ -1,0 +1,37 @@
+<!--
+  Generated template for the ResultPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>result</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item text-wrap>
+      <p>Transcript: {{transcript}}</p>  
+    </ion-item>
+    <ion-item text-wrap>
+      <p>Sentiment: {{sentimentResult}}</p>  
+    </ion-item>
+    <ion-item text-wrap>
+      <p>Sentiment Score: </p> 
+      <p>Positive: {{sentimentScore.Positive}}</p> 
+      <p>Negative: {{sentimentScore.Negative}}</p> 
+      <p>Neutral: {{sentimentScore.Neutral}}</p> 
+      <p>Mixed: {{sentimentScore.Mixed}}</p> 
+    </ion-item>
+    <ion-item text-wrap>
+      <p>Key Phrases: </p>      
+      <p *ngFor="let k of keyPhrasesArray; "> {{k}}        </p>
+    </ion-item>
+  </ion-list>
+  <button ion-button full (click)="dismiss()">Cancel</button>
+</ion-content>
