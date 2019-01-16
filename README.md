@@ -1,4 +1,4 @@
-# ChatDiary = A demo that uses AWS with a mobile app for speech analysis
+# ChatDiary - A demo that uses AWS with a mobile app for speech analysis
 Mobile app: built with Ionic 3 (however the AWS part should work with any mobile app)
 
 Job flow:
