@@ -45,27 +45,29 @@ Convert the audio format to mp3 (3gp to mp3, assuming Android)
 4. set up elastic transcoder to create a pipeline id 		
 
 5. create a lambda to start the conversion, triggered by a file created in the source S3
-		(see the index.js in the folder aws/convert3gpToMp3 for the actual lambda function)
-		set up environment variables accordingly
-		
-		<img src="./aws/convert3gpToMp3/environment_variable.png" />
-		
+	(see the index.js in the folder aws/convert3gpToMp3 for the actual lambda function)
+	set up environment variables accordingly
+	
+	![](./aws/convert3gpToMp3/environment_variable.png)
+				
 		
 Create Transcribe job to be triggered on file created in the bucket with the converted mp3 files
 6. create an S3 bucket to collect transcribe results
 
 7. creare a lambda to trigger the Transcribe job (see index.py in the folder aws/FlorenceTranscribe for the actual function)
-		set up environment variables accordingly
+	set up environment variables accordingly
 		
-		<img src="./aws/FlorenceTranscribe/environment_variable.png" />
+	![](./aws/FlorenceTranscribe/environment_variable.png)
+		
 	
 Create Comprehend job to analyse Transcribed audio and save the result in database
 8. create a dynamoDB table to store the Comprehend results (just the table name is needed for the lambda)
 
 9. create a lambda to trigger Comprehend on file created in the bucket that store Transcirbe results,(see lambda_function.py in aws/FlorenceComprehend for the actual function)
-		set up environment variables accordingly
+	set up environment variables accordingly
 		
-		<img src="./aws/FlorenceComprehend/environment_variable.png" />
+	![](./aws/FlorenceComprehend/environment_variable.png)
+		
 	
 Allow external app to query the final results
 10. create a lambda to search for the correct record in the database (see index.js in QueryComprehendResult for the actual function)
