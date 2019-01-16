@@ -1,21 +1,21 @@
-# ChatDiary
-
-## A demo that uses AWS with a mobile app for speech analysis
+# ChatDiary = A demo that uses AWS with a mobile app for speech analysis
 Mobile app: built with Ionic 3 (however the AWS part should work with any mobile app)
 
 Job flow:
 Record audio from mobile app -> upload to AWS S3 -> convert file to mp3 -> Amazon Transcribe -> Amazon Comprehend -> store results in Amazon DynamoDB -> query results from any app with Lambda API
 
 the app looks like:
-![](./aws/ChatDiary1.png | width=200)
+
+![](./aws/ChatDiary1.png)
 
 after AWS does all its work, the result looks like:
-![](./aws/ChatDiary1.png | width=200)
+
+![](./aws/ChatDiary1.png)
 
 
 
 
-###Ionic 3
+### Ionic 3
 If you choose to work with Ionic, you need to
 1. install ionic as per instruction: https://ionicframework.com/docs/intro/installation/
 
@@ -30,7 +30,7 @@ If you choose to work with Ionic, you need to
 
 
 
-###Settin up AWS
+### Settin up AWS
 After creating an account with AWS, you will need to set up the following:(and all the lambda roles for different services, omitted here):
 
 Initial set up and file upload:
@@ -67,9 +67,11 @@ Allow external app to query the final results
 10. create a lambda to search for the correct record in the database (see index.js in QueryComprehendResult for the actual function)
 
 11. create an API link that an external app can access the last lambda, the lambda can actually generate an api link by itself, or we can use API gateway and integrate with the lambda(see screenshots)
-	<img src="./aws/APIgateway/Integration_Request.png" />
-	<img src="./aws/APIgateway/method_Request.png" />
-
+	
+	![](./aws/APIgateway/Integration_Request.png)
+	
+	![](./aws/APIgateway/method_Request.png)
+	
 12. call this API endpoint to query the result, the app will need to include the filename of the audio file in its request to get the corresponding result
 
 
