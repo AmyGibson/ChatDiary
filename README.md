@@ -10,7 +10,7 @@ the app looks like:
 
 after AWS does all its work, the result looks like:
 
-![](./aws/ChatDiary1.png)
+![](./aws/ChatDiary2.png)
 
 
 
@@ -30,6 +30,7 @@ If you choose to work with Ionic, you need to
 
 
 
+
 ### Settin up AWS
 After creating an account with AWS, you will need to set up the following:(and all the lambda roles for different services, omitted here):
 
@@ -46,14 +47,16 @@ Convert the audio format to mp3 (3gp to mp3, assuming Android)
 5. create a lambda to start the conversion, triggered by a file created in the source S3
 		(see the index.js in the folder aws/convert3gpToMp3 for the actual lambda function)
 		set up environment variables accordingly
+		
 		<img src="./aws/convert3gpToMp3/environment_variable.png" />
-		![Alt text](./aws/convert3gpToMp3/environment_variable.png?raw=true)
+		
 		
 Create Transcribe job to be triggered on file created in the bucket with the converted mp3 files
 6. create an S3 bucket to collect transcribe results
 
 7. creare a lambda to trigger the Transcribe job (see index.py in the folder aws/FlorenceTranscribe for the actual function)
 		set up environment variables accordingly
+		
 		<img src="./aws/FlorenceTranscribe/environment_variable.png" />
 	
 Create Comprehend job to analyse Transcribed audio and save the result in database
@@ -61,6 +64,7 @@ Create Comprehend job to analyse Transcribed audio and save the result in databa
 
 9. create a lambda to trigger Comprehend on file created in the bucket that store Transcirbe results,(see lambda_function.py in aws/FlorenceComprehend for the actual function)
 		set up environment variables accordingly
+		
 		<img src="./aws/FlorenceComprehend/environment_variable.png" />
 	
 Allow external app to query the final results
